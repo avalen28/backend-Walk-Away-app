@@ -2,6 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 const User = require("../models/User");
+const Route = require("../models/Route");
 
 // Place the array you want to seed
 
@@ -24,6 +25,28 @@ const usersArr = [
   },
 ];
 
+const routesArr = [
+  {
+    name: "Ruta Cazadores",
+    image:
+      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+    distance: 16,
+    level: 1,
+    description: "amazing route in Ordesa",
+    estimatedDuration: 5.5,
+    inventary: ["drinks", "food", "sportswear", "footwear"],
+  },
+  {
+    name: "Saldes",
+    image:
+      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+    distance: 7,
+    level: 3,
+    description: "amazing route in Pedraforca",
+    estimatedDuration: 3.4,
+    inventary: ["drinks", "food", "sportswear"],
+  },
+];
 
 
 mongoose
@@ -33,10 +56,22 @@ mongoose
     return User.deleteMany({});
   })
   .then(() => {
+    return Route.deleteMany({});
+  })
+  .then(() => {
+    return Route.create(routesArr);
+  })
+  .then((created) => {
+    console.log(`Created ${created.length} Route 🌱`);
+  })
+  .then(() => {
     return User.create(usersArr);
   })
   .then((created) => {
-    console.log(`Created ${created.length} Users Seed done 🌱`);
+    console.log(`Created ${created.length} Users 🌱`);
+  })
+  .then(() => {
+    console.log("Seed created!!!");
   })
   .catch((e) => console.log("error connecting Mongo", e))
   .finally(() => {
