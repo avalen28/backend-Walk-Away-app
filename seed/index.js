@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", true);
 const User = require("../models/User");
 const Route = require("../models/Route");
+const Inventary = require("../models/Inventary");
 
 // Place the array you want to seed
 
@@ -48,7 +49,6 @@ const routesArr = [
   },
 ];
 
-
 mongoose
   .connect(process.env.MONGO_URL)
   .then((x) => console.log(`Connected to ${x.connection.name}`))
@@ -62,16 +62,26 @@ mongoose
     return Route.create(routesArr);
   })
   .then((created) => {
-    console.log(`Created ${created.length} Route 🌱`);
+    console.log(`Created ${created.length} Route 🏞️`);
   })
   .then(() => {
     return User.create(usersArr);
   })
   .then((created) => {
-    console.log(`Created ${created.length} Users 🌱`);
+    console.log(`Created ${created.length} Users 🏃`);
+    const ids = created.map((elem) => elem._id.toString()); //pasamos a string porque viene de Mongo como objectID
+    const inventaryData = [
+      { userId: ids[0] },
+      { userId: ids[1] },
+      { userId: ids[2] },
+    ];
+    return Inventary.create(inventaryData);
+  })
+  .then((created) => {
+    console.log(`Created ${created.length} inventary 🎒`);
   })
   .then(() => {
-    console.log("Seed created!!!");
+    console.log("Seed created!!! 🌱");
   })
   .catch((e) => console.log("error connecting Mongo", e))
   .finally(() => {
