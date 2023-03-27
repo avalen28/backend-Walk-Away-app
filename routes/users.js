@@ -3,7 +3,7 @@ const User = require("../models/User")
 const Inventary = require("../models/Inventary")
 
 // @desc    Get all Users
-// @route   GET /user/all
+// @route   GET /users/all
 // @access  Public
 router.get("/all", async (req, res, next) => {
   try {
@@ -15,7 +15,7 @@ router.get("/all", async (req, res, next) => {
 });
 
 // @desc    Get an especific User
-// @route   GET /user/:userId
+// @route   GET /users/:userId
 // @access  Public
 router.get("/:userId", async (req, res, next) => {
     const { userId } = req.params;
@@ -44,7 +44,7 @@ router.post("/new", async (req, res, next) => {
 });
 
 // @desc    PUT edit User
-// @route   PUT /edit/:userId
+// @route   PUT /users/edit/:userId
 // @access  Public
 router.put("/edit/:userId", async (req, res, next) => {
     const { userId } = req.params;
@@ -58,7 +58,7 @@ router.put("/edit/:userId", async (req, res, next) => {
 });
 
 // @desc    Delete delete User and Inventary
-// @route   DELETE /delete/:userId
+// @route   DELETE /users/delete/:userId
 // @access  Public
 router.delete("/delete/:userId", async (req, res, next) => {
     const { userId } = req.params;

@@ -2,7 +2,7 @@ const router = require("express").Router()
 const Route = require("../models/Route")
 
 // @desc    Get all Routes
-// @route   GET /route/all
+// @route   GET /routes/all
 // @access  Public
 router.get("/all", async (req, res, next) => {
   try {
@@ -14,7 +14,7 @@ router.get("/all", async (req, res, next) => {
 });
 
 // @desc    Get an especific Route
-// @route   GET /route/:routeId
+// @route   GET /routes/:routeId
 // @access  Public
 router.get("/:routeId", async (req, res, next) => {
   const { routeId } = req.params;
@@ -27,7 +27,7 @@ router.get("/:routeId", async (req, res, next) => {
 });
 
 // @desc    Post create a new Route
-// @route   POST /route/new
+// @route   POST /routes/new
 // @access  Public
 router.post("/new", async (req, res, next) => {
   try {
@@ -40,7 +40,7 @@ router.post("/new", async (req, res, next) => {
 });
 
 // @desc    PUT edit route
-// @route   PUT /edit/:routeId
+// @route   PUT /routes/edit/:routeId
 // @access  Public
 router.put("/edit/:routeId", async (req, res, next) => {
     const { routeId } = req.params;
@@ -54,7 +54,7 @@ router.put("/edit/:routeId", async (req, res, next) => {
 });
 
 // @desc    Delete delete Route
-// @route   DELETE /delete/:routeId
+// @route   DELETE /routes/delete/:routeId
 // @access  Public
 router.delete("/delete/:routeId", async (req, res, next) => {
   const { routeId } = req.params;
