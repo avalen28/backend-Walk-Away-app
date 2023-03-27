@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const Inventary = require("../models/Inventary")
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
@@ -36,7 +37,11 @@ router.post('/signup', async (req, res, next) => {
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
       const newUser = await User.create({ email, hashedPassword, username });
-      res.status(201).json({ data: newUser });
+      const newUserInventary = await Inventary.create({ userId: newUser._id });
+       if (newUser && newUserInventary) {
+         console.log("user with inventary created");
+         res.status(201).json({ data: newUser });
+       }
     }
   } catch (error) {
     next(error);

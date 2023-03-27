@@ -27,22 +27,6 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// @desc    Post create a new User and Inventary
-// @route   POST /user/new
-// @access  Public
-router.post("/new", async (req, res, next) => {
-  try {
-      const newUser = await User.create(req.body);
-      const newUserInventary = await Inventary.create({userId:newUser._id})
-      res.status(201).json(newUser);
-      if (newUser && newUserInventary) {
-          console.log("user with inventary created")
-      }
-  } catch (error) {
-    next(error);
-  }
-});
-
 // @desc    PUT edit User
 // @route   PUT /users/edit/:userId
 // @access  Public
