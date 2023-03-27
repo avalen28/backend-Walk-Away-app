@@ -59,6 +59,9 @@ mongoose
     return Route.deleteMany({});
   })
   .then(() => {
+    return Inventary.deleteMany({});
+  })
+  .then(() => {
     return Route.create(routesArr);
   })
   .then((created) => {
