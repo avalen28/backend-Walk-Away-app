@@ -27,8 +27,8 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-// @desc    Post create a new User
-// @route   POST /new
+// @desc    Post create a new User and Inventary
+// @route   POST /user/new
 // @access  Public
 router.post("/new", async (req, res, next) => {
   try {
@@ -57,8 +57,8 @@ router.put("/edit/:userId", async (req, res, next) => {
   }
 });
 
-// @desc    PUT edit User
-// @route   PUT /edit/:userId
+// @desc    Delete delete User and Inventary
+// @route   DELETE /delete/:userId
 // @access  Public
 router.delete("/delete/:userId", async (req, res, next) => {
     const { userId } = req.params;
