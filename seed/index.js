@@ -12,7 +12,8 @@ const usersArr = [
   {
     username: "Bojack Horseman",
     email: "bojack@gmail.com",
-    hashedPassword: "fj<lkfj3lkjfl", //password hardcode hashed
+    hashedPassword:
+      "$2a$10$1QvmsDTCfg8hC96HwDhREuJYlu1RbEUjgCZH7CQ2baxUyKX4v.85a", //Bojack1234!
   },
   {
     username: "Ale",
@@ -23,6 +24,13 @@ const usersArr = [
     username: "Marina",
     email: "Marina@gmail.com",
     hashedPassword: "fj<lkfj3lkjfl", //password hardcode hashed
+  },
+  {
+    username: "Alberto",
+    email: "alberto@gmail.com",
+    hashedPassword:
+      "$2a$10$Qa6R5HNNHrULQ2crT2jYzeWwrtStJ7AwOKwRor./La2JrJiWKklpa", //Admin1234!
+    isAdmin: true,
   },
 ];
 
@@ -77,6 +85,7 @@ mongoose
       { userId: ids[0] },
       { userId: ids[1] },
       { userId: ids[2] },
+      { userId: ids[3] },
     ];
     return Inventary.create(inventaryData);
   })

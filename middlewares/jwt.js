@@ -19,7 +19,7 @@ const isAuthenticated = jwt({
 });
 
 const isAdmin = (req, res, next) => {
-  // if (req.payload.role === 'admin') 
+ 
   if (req.payload.isAdmin) {
     next();
   } else {

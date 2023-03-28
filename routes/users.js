@@ -7,9 +7,9 @@ const saltRounds = 10;
 
 // @desc    Get all Users
 // @route   GET /users/all
-// @access  Public
+// @access  Private - Admin
 // @Postman Checked
-router.get("/all", async (req, res, next) => {
+router.get("/all", isAuthenticated, isAdmin, async (req, res, next) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -33,7 +33,7 @@ router.get("/me",isAuthenticated, async (req, res, next) => {
 });
 
 // @desc    PUT edit Users
-// @route   PUT /users/edit/:userId
+// @route   PUT /users/edit/
 // @access  Private
 // @Postman Checked
 router.put("/edit",isAuthenticated, async (req, res, next) => {
@@ -76,8 +76,9 @@ router.put("/edit",isAuthenticated, async (req, res, next) => {
 });
 
 // @desc    Delete delete User and Inventary
-// @route   DELETE /users/delete/:userId
-// @access  Public
+// @route   DELETE /users/delete
+// @access  Private
+// @Postman Checked
 router.delete("/delete",isAuthenticated, async (req, res, next) => {
     const { _id } = req.payload;
   try {
