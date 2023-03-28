@@ -19,10 +19,11 @@ const isAuthenticated = jwt({
 });
 
 const isAdmin = (req, res, next) => {
-  if (req.payload.role === 'admin') {
-    next()
+  // if (req.payload.role === 'admin') 
+  if (req.payload.isAdmin) {
+    next();
   } else {
-    res.status(401).json({ message: 'User is not admin'})
+    res.status(401).json({ message: "User is not admin" });
     return;
   }
 }

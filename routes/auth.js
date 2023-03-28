@@ -9,39 +9,52 @@ const saltRounds = 10;
 // @desc    SIGN UP new user
 // @route   POST /api/v1/auth/signup
 // @access  Public
+// @Postman Checked
 router.post('/signup', async (req, res, next) => {
-  const { email, password, username } = req.body;
-  // Check if email or password or name are provided as empty string 
-  if (email === "" || password === "" || username === "") {
-    res.status(400).json({ message: 'Please fill all the fields to register' });
+  const { email, password1,password2, username } = req.body;
+  // Check if email or password or name are provided as empty string
+  if (email === "" || password1 === "" || password2 === "" || username === "") {
+    res.status(400).json({ message: "Please fill all the fields to register" });
     return;
   }
   // Use regex to validate the email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   if (!emailRegex.test(email)) {
-    res.status(400).json({ message: 'Not a valid email format' });
+    res.status(400).json({ message: "Not a valid email format" });
     return;
   }
-   // Use regex to validate the password format
+  // Check if both passwords are the same
+  if (password1 !== password2) {
+    res.status(400).json({ message: "Please check your password" });
+    return;
+  }
+  // Use regex to validate the password format
   const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!passwordRegex.test(password)) {
-    res.status(400).json({ message: 'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter' });
+  if (!passwordRegex.test(password1)) {
+    res
+      .status(400)
+      .json({
+        message:
+          "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter",
+      });
     return;
   }
   try {
     const userInDB = await User.findOne({ email });
     if (userInDB) {
-      res.status(400).json({ message: `User already exists with email ${email}` })
+      res
+        .status(400)
+        .json({ message: `User already exists with email ${email}` });
       return;
     } else {
       const salt = bcrypt.genSaltSync(saltRounds);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+      const hashedPassword = bcrypt.hashSync(password1, salt);
       const newUser = await User.create({ email, hashedPassword, username });
       const newUserInventary = await Inventary.create({ userId: newUser._id });
-       if (newUser && newUserInventary) {
-         console.log("user with inventary created");
-         res.status(201).json({ data: newUser });
-       }
+      if (newUser && newUserInventary) {
+        console.log("user with inventary created");
+        res.status(201).json({ data: newUser });
+      }
     }
   } catch (error) {
     next(error);
@@ -51,6 +64,7 @@ router.post('/signup', async (req, res, next) => {
 // @desc    LOG IN user
 // @route   POST /api/v1/auth/login
 // @access  Public
+// @Postman Checked
 router.post('/login', async (req, res, next) => { 
   console.log(req.headers);
   const { email, password } = req.body;
@@ -71,11 +85,14 @@ router.post('/login', async (req, res, next) => {
       if (passwordMatches) {
         // Let's create what we want to store in the jwt token
         const payload = {
-          email: userInDB.email,
           username: userInDB.username,
-          role: userInDB.role,
-          _id: userInDB._id
-        }
+          img: userInDB.img,
+          email: userInDB.email,
+          experiencePoints: userInDB.experiencePoints,
+          level: userInDB.level,
+          isAdmin: userInDB.isAdmin,
+          _id: userInDB._id,
+        };
         // Use the jwt middleware to create de token
         const authToken = jwt.sign(
           payload,
@@ -96,6 +113,7 @@ router.post('/login', async (req, res, next) => {
 // @desc    GET logged in user
 // @route   GET /api/v1/auth/me
 // @access  Private
+// @Postman Checked
 router.get('/me', isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`

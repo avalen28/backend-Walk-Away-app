@@ -1,12 +1,14 @@
 const router = require("express").Router()
 const User = require("../models/User")
 const Inventary = require("../models/Inventary")
+const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 // @desc    Get all Users
 // @route   GET /users/all
 // @access  Public
+// @Postman Checked
 router.get("/all", async (req, res, next) => {
   try {
     const users = await User.find();
@@ -17,12 +19,13 @@ router.get("/all", async (req, res, next) => {
 });
 
 // @desc    Get an especific User
-// @route   GET /users/:userId
-// @access  Public
-router.get("/:userId", async (req, res, next) => {
-    const { userId } = req.params;
+// @route   GET /users/me
+// @access  Private
+// @Postman Checked
+router.get("/me",isAuthenticated, async (req, res, next) => {
+    const { _id } = req.payload;
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(_id);
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -31,9 +34,10 @@ router.get("/:userId", async (req, res, next) => {
 
 // @desc    PUT edit Users
 // @route   PUT /users/edit/:userId
-// @access  Public
-router.put("/edit/:userId", async (req, res, next) => {
-  const { userId } = req.params;
+// @access  Private
+// @Postman Checked
+router.put("/edit",isAuthenticated, async (req, res, next) => {
+  const { _id } = req.payload;
   const { username, email, password1, password2 } = req.body;
 
   //Check all fields on edit body are filled
@@ -63,8 +67,8 @@ router.put("/edit/:userId", async (req, res, next) => {
   }
 
   try {
-    await User.findByIdAndUpdate(userId, req.body, { new: true });
-    const updateUser = await User.findById(userId);
+    await User.findByIdAndUpdate(_id, req.body, { new: true });
+    const updateUser = await User.findById(_id);
     res.status(200).json(updateUser);
   } catch (error) {
     next(error);
@@ -74,14 +78,14 @@ router.put("/edit/:userId", async (req, res, next) => {
 // @desc    Delete delete User and Inventary
 // @route   DELETE /users/delete/:userId
 // @access  Public
-router.delete("/delete/:userId", async (req, res, next) => {
-    const { userId } = req.params;
+router.delete("/delete",isAuthenticated, async (req, res, next) => {
+    const { _id } = req.payload;
   try {
-      await User.findByIdAndDelete(userId);
-      await Inventary.findOneAndDelete(userId)
+      await User.findByIdAndDelete(_id);
+      await Inventary.findOneAndDelete(_id);
       const allUsers = await User.find()
-
-    res.status(200).json(allUsers);
+    res.status(200).json({message: "user deleted"});
+    console.log(`Users in DB ${allUsers.length}`)
   } catch (error) {
     next(error);
   }
