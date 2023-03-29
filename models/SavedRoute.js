@@ -5,12 +5,12 @@ const savedRouteSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: User,
+      ref: "User",
       required: true,
     },
     routeId: {
       type: Schema.Types.ObjectId,
-      ref: Route,
+      ref: "Route",
       required: true,
     },
     status: {

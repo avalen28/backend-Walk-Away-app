@@ -11,6 +11,7 @@ const authRouter = require('./routes/auth');
 const userRouter = require("./routes/users")
 const routeRouter = require("./routes/routes")
 const inventaryRouter = require("./routes/inventary")
+const savedRoutes = require("./routes/savedRoutes")
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/auth', authRouter);
 app.use("/users", userRouter)
 app.use("/routes", routeRouter)
 app.use("/inventary", inventaryRouter)
+app.use("/saved-routes", savedRoutes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
