@@ -13,7 +13,6 @@ const isValid = require("../utils/index");
 // @Postman Checked
 router.post("/signup", async (req, res, next) => {
   const { email, password1, password2, username } = req.body;
-  // Check if email or password or name are provided as empty string
   if (!isValid(username, "string")) {
     res.status(400).json({ message: "Please provide a valid user name" });
     return;
@@ -30,7 +29,7 @@ router.post("/signup", async (req, res, next) => {
     return;
   }
   if (password1 !== password2) {
-    res.status(400).json({ message: "Please check your password" });
+    res.status(400).json({ message: "Please check both passwords" });
     return;
   }
   try {

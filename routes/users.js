@@ -4,6 +4,7 @@ const Inventary = require("../models/Inventary")
 const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
+const isValid = require("../utils/index");
 
 // @desc    Get all Users
 // @route   GET /users/all
@@ -32,43 +33,35 @@ router.get("/me",isAuthenticated, async (req, res, next) => {
   }
 });
 
-// @desc    PUT edit Users
+// @desc    PUT edit User in session
 // @route   PUT /users/edit/
 // @access  Private
 // @Postman Checked
 router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { username, email, password1, password2 } = req.body;
-
-  //Check all fields on edit body are filled
-  if (username === "" || email === "" || password1 === "" || password2 === "") {
-    res.status(400).json({ message: "Please fill all the fields to edit" });
+  if (!isValid(username, "string")) {
+    res.status(400).json({ message: "Please provide a valid user name" });
     return;
   }
-  // Use regex to validate the email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  if (!emailRegex.test(email)) {
+  if (!isValid(email, "email")) {
     res.status(400).json({ message: "Not a valid email format" });
     return;
   }
-// Check if both passwords are the same
-  if (password1 !== password2) {
-    res.status(400).json({ message: "Please check your password" });
-    return;
-  }
-  // Use regex to validate the password format
-  const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-  if (!passwordRegex.test(password1)) {
+  if (!isValid(password1, "password")) {
     res.status(400).json({
       message:
         "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter",
     });
     return;
   }
-
+  if (password1 !== password2) {
+    res.status(400).json({ message: "Please check both passwords" });
+    return;
+  }
+  
   try {
-    await User.findByIdAndUpdate(_id, req.body, { new: true });
-    const updateUser = await User.findById(_id);
+    const updateUser = await User.findByIdAndUpdate(_id, req.body, { new: true });
     res.status(200).json(updateUser);
   } catch (error) {
     next(error);
