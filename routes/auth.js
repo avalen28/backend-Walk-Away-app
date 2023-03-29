@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
 const saltRounds = 10;
+const isValid = require("../utils/index")
 
 // @desc    SIGN UP new user
 // @route   POST /api/v1/auth/signup
@@ -13,7 +14,12 @@ const saltRounds = 10;
 router.post('/signup', async (req, res, next) => {
   const { email, password1,password2, username } = req.body;
   // Check if email or password or name are provided as empty string
-  if (email === "" || password1 === "" || password2 === "" || username === "") {
+  if (
+    !isValid(email, "string") ||
+    !isValid(password1, "string") ||
+    !isValid(password2, "string") ||
+    !isValid(username, "string")
+  ) {
     res.status(400).json({ message: "Please fill all the fields to register" });
     return;
   }

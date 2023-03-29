@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { model } = require("mongoose");
 const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
+const isValid = require("../utils/index")
 const Inventary = require("../models/Inventary");
 
 // @desc    Get the User's inventary
@@ -17,15 +18,21 @@ router.get("/", isAuthenticated, async (req, res, next) => {
   }
 });
 
-//WIP!!!!!!-------------------------------------
 // @desc    PUT edit User's inventary
 // @route   PUT /inventary/edit
-// @access  Prtivate
-router.put("/edit/",isAuthenticated, async (req, res, next) => {
+// @access  Private
+// @Postman Checked
+router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { food, drinks, sportwear, footwear, other } = req.body
-  if (typeof(food)  == "boolean") {
-    res.status(400).json({ message: "Prueba" });
+  if (
+    !isValid(food, "boolean") ||
+    !isValid(drinks, "boolean") ||
+    !isValid(sportwear, "boolean") ||
+    !isValid(footwear, "boolean") ||
+    !isValid(other,"array")
+  ) {
+    res.status(400).json({ message: "Please check your fields" });
     return;
   }
   try {
