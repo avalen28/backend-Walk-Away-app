@@ -1,5 +1,7 @@
-const router = require("express").Router()
-const Route = require("../models/Route")
+const router = require("express").Router();
+const Route = require("../models/Route");
+const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
+const isValid = require("../utils/index");
 
 // @desc    Get all Routes
 // @route   GET /routes/all
@@ -28,12 +30,34 @@ router.get("/:routeId", async (req, res, next) => {
 
 // @desc    Post create a new Route
 // @route   POST /routes/new
-// @access  Public
-router.post("/new", async (req, res, next) => {
+// @access  Private - Admin
+router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
+  const {
+    name,
+    image,
+    distance,
+    level,
+    description,
+    estimatedDuration,
+    inventary,
+    tips,
+  } = req.body;
+  if (
+    !isValid(name, "string") ||
+    !isValid(image, "string") ||
+    !isValid(distance, "number") ||
+    !isValid(level, "number") ||
+    !isValid(description, "string") ||
+    !isValid(estimatedDuration, "number") ||
+    !isValid(inventary, "array") ||
+    !isValid(tips, "string")
+  ) {
+    res.status(400).json({ message: "Please check your fields" });
+    return;
+  }
   try {
-      const newRoute = await Route.create(req.body);
-      res.status(201).json(newRoute);
-      
+    const newRoute = await Route.create(req.body);
+    res.status(201).json(newRoute);
   } catch (error) {
     next(error);
   }
@@ -41,30 +65,64 @@ router.post("/new", async (req, res, next) => {
 
 // @desc    PUT edit route
 // @route   PUT /routes/edit/:routeId
-// @access  Public
-router.put("/edit/:routeId", async (req, res, next) => {
+// @access  Private - Admin
+router.put(
+  "/edit/:routeId",
+  isAuthenticated,
+  isAdmin,
+  async (req, res, next) => {
     const { routeId } = req.params;
-  try {
+    const {
+      name,
+      image,
+      distance,
+      level,
+      description,
+      estimatedDuration,
+      inventary,
+      tips,
+    } = req.body;
+    if (
+      !isValid(name, "string") ||
+      !isValid(image, "string") ||
+      !isValid(distance, "number") ||
+      !isValid(level, "number") ||
+      !isValid(description, "string") ||
+      !isValid(estimatedDuration, "number") ||
+      !isValid(inventary, "array") ||
+      !isValid(tips, "string")
+    ) {
+      res.status(400).json({ message: "Please check your fields" });
+      return;
+    }
+  
+    try {
       await Route.findByIdAndUpdate(routeId, req.body, { new: true });
-      const updateRoute = await Route.findById(routeId)
-    res.status(200).json(updateRoute);
-  } catch (error) {
-    next(error);
+      const updateRoute = await Route.findById(routeId);
+      res.status(200).json(updateRoute);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Delete delete Route
 // @route   DELETE /routes/delete/:routeId
-// @access  Public
-router.delete("/delete/:routeId", async (req, res, next) => {
-  const { routeId } = req.params;
-  try {
-    await Route.findByIdAndDelete(routeId);
-    const allRoutes = await Route.find();
-    res.status(200).json(allRoutes);
-  } catch (error) {
-    next(error);
+// @access  Private - Admin
+router.delete(
+  "/delete/:routeId",
+  isAuthenticated,
+  isAdmin,
+  async (req, res, next) => {
+    const { routeId } = req.params;
+    try {
+      await Route.findByIdAndDelete(routeId);
+      const allRoutes = await Route.find();
+      res.status(200).json(allRoutes);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-module.exports = router
+module.exports = router;

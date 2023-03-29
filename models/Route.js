@@ -29,6 +29,7 @@ const routeSchema = new Schema(
     estimatedDuration: {
       type: Number,
       required: true,
+      min: 1,
     },
     inventary: {
       type: [String],

@@ -82,8 +82,8 @@ router.put("/edit",isAuthenticated, async (req, res, next) => {
 router.delete("/delete",isAuthenticated, async (req, res, next) => {
     const { _id } = req.payload;
   try {
+    await Inventary.findOneAndDelete({ userId:_id });
       await User.findByIdAndDelete(_id);
-      await Inventary.findOneAndDelete(_id);
       const allUsers = await User.find()
     res.status(200).json({message: "user deleted"});
     console.log(`Users in DB ${allUsers.length}`)
