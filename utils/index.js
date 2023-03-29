@@ -23,6 +23,20 @@ const isValid = (value, typeOfvalue) => {
     } else {
       return false;
     }
+  } else if (typeOfvalue === "email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (emailRegex.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (typeOfvalue === "password") {
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (passwordRegex.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 

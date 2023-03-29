@@ -86,7 +86,6 @@ router.delete("/delete",isAuthenticated, async (req, res, next) => {
       await User.findByIdAndDelete(_id);
       const allUsers = await User.find()
     res.status(200).json({message: "user deleted"});
-    console.log(`Users in DB ${allUsers.length}`)
   } catch (error) {
     next(error);
   }
