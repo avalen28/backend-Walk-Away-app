@@ -17,8 +17,8 @@ router.get("/all", async (req, res, next) => {
 
 // @desc    Get an especific Route
 // @route   GET /routes/:routeId
-// @access  Public
-router.get("/:routeId", async (req, res, next) => {
+// @access  private
+router.get("/:routeId",isAuthenticated, async (req, res, next) => {
   const { routeId } = req.params;
   try {
     const route = await Route.findById(routeId);
