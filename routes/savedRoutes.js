@@ -21,14 +21,22 @@ router.get("/all", isAuthenticated, async (req, res, next) => {
 // @access  Private
 router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
-  const { routeId } = req.params;
-  try {
-    const newSavedRouteFromDB = await SavedRoute.create({
-      userId: _id,
-      routeId: routeId,
-      status: "pending",
-    });
-    res.status(201).json(newSavedRouteFromDB);
+    const { routeId } = req.params;
+    try {
+        const savedRoutesFromDB = await SavedRoute.findOne({ routeId })
+        if (savedRoutesFromDB) {
+            res
+              .status(400)
+              .json({ message: "This route is already exists" });
+            return; 
+        } else {
+            const newSavedRouteFromDB = await SavedRoute.create({
+              userId: _id,
+              routeId: routeId,
+              status: "pending",
+            });
+            res.status(201).json(newSavedRouteFromDB);
+        }
   } catch (error) {
     next(error);
   }
@@ -59,5 +67,22 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
     next(error);
   }
 });
+
+// @desc    Delete a User's saved route
+// @route   Delete /saved-routes/edit/:savedRouteId
+// @access  Private
+router.delete("/delete/:savedRouteId", isAuthenticated, async (req, res, next) => {
+    const { savedRouteId } = req.params;
+    const { _id } = req.payload;
+  try {
+    await SavedRoute.findOneAndDelete({ _id: savedRouteId });
+   
+      const allSavedRoutes = await SavedRoute.find({ userId: _id });
+    res.status(200).json({ message: "Route deleted" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 module.exports = router;
