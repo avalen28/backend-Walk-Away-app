@@ -35,7 +35,10 @@ const routeSchema = new Schema(
       type: [String],
       required: true,
     },
-    tips: String
+    tips: {
+      type: String,
+      default: "No tips for this route"
+    }
   },
   {
     timestamps: true,

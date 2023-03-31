@@ -49,8 +49,7 @@ router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
     !isValid(level, "number") ||
     !isValid(description, "string") ||
     !isValid(estimatedDuration, "number") ||
-    !isValid(inventary, "array") ||
-    !isValid(tips, "string")
+    !isValid(inventary, "array") 
   ) {
     res.status(400).json({ message: "Please check your fields" });
     return;
@@ -89,8 +88,7 @@ router.put(
       !isValid(level, "number") ||
       !isValid(description, "string") ||
       !isValid(estimatedDuration, "number") ||
-      !isValid(inventary, "array") ||
-      !isValid(tips, "string")
+      !isValid(inventary, "array")
     ) {
       res.status(400).json({ message: "Please check your fields" });
       return;
