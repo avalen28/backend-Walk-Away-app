@@ -39,28 +39,41 @@ router.get("/me",isAuthenticated, async (req, res, next) => {
 // @Postman Checked
 router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
-  const { username, email, password1, password2 } = req.body;
+  const { username, email, img, password1, password2 } = req.body;
+
   if (!isValid(username, "string")) {
     res.status(400).json({ message: "Please provide a valid user name" });
     return;
   }
+    if (!isValid(img, "string")) {
+      res.status(400).json({ message: "Please provide a valid url image" });
+      return;
+    }
   if (!isValid(email, "email")) {
     res.status(400).json({ message: "Not a valid email format" });
     return;
   }
-  if (!isValid(password1, "password")) {
-    res.status(400).json({
-      message:
-        "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter",
-    });
-    return;
-  }
-  if (password1 !== password2) {
-    res.status(400).json({ message: "Please check both passwords" });
-    return;
+
+  if (password1 && password2) {
+    if (password1 !== password2) {
+      res.status(400).json({ message: "Please check both passwords" });
+      return;
+    }
+      if (!isValid(password1, "password")) {
+        res.status(400).json({
+          message:
+            "Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter",
+        });
+        return;
+      }
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hashedPassword = bcrypt.hashSync(password1, salt);
+    req.body.hashedPassword = hashedPassword;
+
   }
   
   try {
+
     const updateUser = await User.findByIdAndUpdate(_id, req.body, { new: true });
     res.status(200).json(updateUser);
   } catch (error) {
