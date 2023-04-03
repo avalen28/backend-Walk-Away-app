@@ -27,7 +27,7 @@ router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
         if (savedRoutesFromDB) {
             res
               .status(400)
-              .json({ message: "This route is already exists" });
+              .json({ message: "This route is already added" });
             return; 
         } else {
             const newSavedRouteFromDB = await SavedRoute.create({

@@ -24,11 +24,12 @@ router.get("/", isAuthenticated, async (req, res, next) => {
 // @Postman Checked
 router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
-  const { food, drinks, sportwear, footwear, other } = req.body
+  const { food, drinks, sportswear, footwear, other } = req.body
+  console.log(req.body);
   if (
     !isValid(food, "boolean") ||
     !isValid(drinks, "boolean") ||
-    !isValid(sportwear, "boolean") ||
+    !isValid(sportswear, "boolean") ||
     !isValid(footwear, "boolean") ||
     !isValid(other,"array")
   ) {
