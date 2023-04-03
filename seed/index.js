@@ -55,6 +55,16 @@ const routesArr = [
     estimatedDuration: 3.4,
     inventary: ["drinks", "food", "sportswear"],
   },
+  {
+    name: "Ruta a Mordor",
+    image:
+      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+    distance: 8,
+    level: 5,
+    description: "amazing route to Mordor",
+    estimatedDuration: 8.8,
+    inventary: ["Frodo", "Sam", "Ring"],
+  },
 ];
 
 mongoose

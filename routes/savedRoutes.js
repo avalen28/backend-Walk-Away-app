@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { isAuthenticated } = require("../middlewares/jwt");
-const { update } = require("../models/SavedRoute");
 const SavedRoute = require("../models/SavedRoute");
 
 // @desc    Get all User's saved routes
@@ -15,11 +14,25 @@ router.get("/all", isAuthenticated, async (req, res, next) => {
     next(error);
   }
 });
+// @desc    Get single User's saved routes
+// @route   GET /saved-routes/:routeId
+// @access  Private
+router.get("/:routeId", isAuthenticated, async (req, res, next) => {
+  const { _id } = req.payload;
+  const {routeId} = req.params
+  try {
+    const savedRoutesInDB = await SavedRoute.findOne({ userId: _id, routeId });
+    res.status(200).json(savedRoutesInDB);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // @desc    Create a User's saved route
 // @route   POST /saved-routes/add/:routeId
 // @access  Private
 router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
+
   const { _id } = req.payload;
     const { routeId } = req.params;
     try {
@@ -49,7 +62,7 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { savedRouteId } = req.params;
   const { status } = req.body;
-  console.log(status);
+
   if (status !== "pending" && status !== "started" && status !== "finished") {
     res.status(400).json({ message: "Please provide a valid status" });
     return;
