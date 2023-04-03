@@ -3,6 +3,7 @@ const Route = require("../models/Route");
 const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
 const isValid = require("../utils/index");
 
+
 // @desc    Get all Routes
 // @route   GET /routes/all
 // @access  Public
@@ -49,7 +50,7 @@ router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
     !isValid(level, "number") ||
     !isValid(description, "string") ||
     !isValid(estimatedDuration, "number") ||
-    !isValid(inventary, "array") 
+    !isValid(inventary, "inventary") 
   ) {
     res.status(400).json({ message: "Please check your fields" });
     return;
@@ -88,7 +89,9 @@ router.put(
       !isValid(level, "number") ||
       !isValid(description, "string") ||
       !isValid(estimatedDuration, "number") ||
-      !isValid(inventary, "array")
+      !isValid(inventary, "inventary") ||
+      !isValid(tips, "tips")
+
     ) {
       res.status(400).json({ message: "Please check your fields" });
       return;

@@ -32,13 +32,43 @@ const routeSchema = new Schema(
       min: 1,
     },
     inventary: {
-      type: [String],
+      type: {
+        drinks: {
+          type: String,
+          enum: ["1L.", "1.5L.", "2L.", "Isotonic drink"],
+          required: true,
+        },
+        food: {
+          type: String,
+          enum: ["Lunch", "Snacks", "All day meal", "Two days meal"],
+          required: true,
+        },
+        sportswear: {
+          type: String,
+          enum: [
+            "Trekking clothes (spring weather)",
+            "Moutain clothes(winter weather)",
+            "High Mountain clothes",
+            "Long Route",
+          ],
+          required: true,
+        },
+        footwear: {
+          type: String,
+          enum: [
+            "Light boots or trekking slippers",
+            "Moutain boots",
+            "High Mountain boots",
+          ],
+          required: true,
+        },
+      },
       required: true,
     },
     tips: {
       type: String,
-      default: "No tips for this route"
-    }
+      default: "No tips for this route",
+    },
   },
   {
     timestamps: true,

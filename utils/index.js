@@ -37,6 +37,28 @@ const isValid = (value, typeOfvalue) => {
     } else {
       return false;
     }
+  } else if (typeOfvalue === "inventary") {
+    if (
+      typeof value === "object" &&
+      value.drinks &&
+      value.food &&
+      value.sportswear &&
+      value.footwear
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (typeOfvalue === "tips") {
+    if (
+      typeof value === "string" &&
+      value.length <= 500 &&
+      value.trim().length > 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 

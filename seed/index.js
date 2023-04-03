@@ -43,7 +43,12 @@ const routesArr = [
     level: 1,
     description: "amazing route in Ordesa",
     estimatedDuration: 5.5,
-    inventary: ["drinks", "food", "sportswear", "footwear"],
+    inventary: {
+      drinks: "1L.",
+      food: "Lunch",
+      sportswear: "Trekking clothes (spring weather)",
+      footwear: "Light boots or trekking slippers",
+    },
   },
   {
     name: "Saldes",
@@ -53,7 +58,12 @@ const routesArr = [
     level: 3,
     description: "amazing route in Pedraforca",
     estimatedDuration: 3.4,
-    inventary: ["drinks", "food", "sportswear"],
+    inventary: {
+      drinks: "1.5L.",
+      food: "Snacks",
+      sportswear: "High Mountain clothes",
+      footwear: "Moutain boots",
+    },
   },
   {
     name: "Ruta a Mordor",
@@ -63,7 +73,12 @@ const routesArr = [
     level: 5,
     description: "amazing route to Mordor",
     estimatedDuration: 8.8,
-    inventary: ["Frodo", "Sam", "Ring"],
+    inventary: {
+      drinks: "2L.",
+      food: "Two days meal",
+      sportswear: "High Mountain clothes",
+      footwear: "Moutain boots",
+    },
   },
 ];
 
