@@ -8,7 +8,7 @@ const SavedRoute = require("../models/SavedRoute");
 router.get("/all", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   try {
-    const savedRoutesInDB = await SavedRoute.find({ userId: _id });
+    const savedRoutesInDB = await SavedRoute.find({ userId: _id }).populate("routeId");
     res.status(200).json(savedRoutesInDB);
   } catch (error) {
     next(error);
