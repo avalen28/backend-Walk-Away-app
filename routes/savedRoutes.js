@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { isAuthenticated } = require("../middlewares/jwt");
 const SavedRoute = require("../models/SavedRoute");
+const User = require("../models/User");
+const Route = require("../models/Route");
 
 // @desc    Get all User's saved routes
 // @route   GET /saved-routes/all
@@ -8,7 +10,9 @@ const SavedRoute = require("../models/SavedRoute");
 router.get("/all", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   try {
-    const savedRoutesInDB = await SavedRoute.find({ userId: _id }).populate("routeId");
+    const savedRoutesInDB = await SavedRoute.find({ userId: _id }).populate(
+      "routeId"
+    );
     res.status(200).json(savedRoutesInDB);
   } catch (error) {
     next(error);
@@ -19,7 +23,7 @@ router.get("/all", isAuthenticated, async (req, res, next) => {
 // @access  Private
 router.get("/:routeId", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
-  const {routeId} = req.params
+  const { routeId } = req.params;
   try {
     const savedRoutesInDB = await SavedRoute.findOne({ userId: _id, routeId });
     res.status(200).json(savedRoutesInDB);
@@ -32,24 +36,21 @@ router.get("/:routeId", isAuthenticated, async (req, res, next) => {
 // @route   POST /saved-routes/add/:routeId
 // @access  Private
 router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
-
   const { _id } = req.payload;
-    const { routeId } = req.params;
-    try {
-        const savedRoutesFromDB = await SavedRoute.findOne({ routeId })
-        if (savedRoutesFromDB) {
-            res
-              .status(400)
-              .json({ message: "This route is already added" });
-            return; 
-        } else {
-            const newSavedRouteFromDB = await SavedRoute.create({
-              userId: _id,
-              routeId: routeId,
-              status: "pending",
-            });
-            res.status(201).json(newSavedRouteFromDB);
-        }
+  const { routeId } = req.params;
+  try {
+    const savedRoutesFromDB = await SavedRoute.findOne({ routeId });
+    if (savedRoutesFromDB) {
+      res.status(400).json({ message: "This route is already added" });
+      return;
+    } else {
+      const newSavedRouteFromDB = await SavedRoute.create({
+        userId: _id,
+        routeId: routeId,
+        status: "pending",
+      });
+      res.status(201).json(newSavedRouteFromDB);
+    }
   } catch (error) {
     next(error);
   }
@@ -68,6 +69,48 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
     return;
   }
   try {
+    if (status === "finished") {
+      const userFromDB = await User.findById(_id);
+      const { level, experiencePoints } = userFromDB;
+      const routeFromDB = await SavedRoute.findById(savedRouteId).populate(
+        "routeId"
+      );
+
+      const levelRoute = routeFromDB.routeId.level;
+      const experienceUp = experiencePoints + levelRoute * 100;
+      let levelToUpdate = 0;
+
+      switch (true) {
+        case experienceUp < 200:
+          levelToUpdate = 1;
+          break;
+
+        case experienceUp >= 200 && experienceUp < 500:
+          levelToUpdate = 2;
+          break;
+
+        case experienceUp >= 500 && experienceUp < 900:
+          levelToUpdate = 3;
+          break;
+
+        case experienceUp >= 900 && experienceUp < 1400:
+          levelToUpdate = 4;
+          break;
+
+        case experienceUp >= 1400:
+          levelToUpdate = 5;
+          break;
+
+        default:
+          levelToUpdate = level;
+          break;
+      }
+
+     await User.findByIdAndUpdate(_id, {
+        level: levelToUpdate,
+        experiencePoints: experienceUp,
+      });
+    }
     const updatedRoute = await SavedRoute.findByIdAndUpdate(
       savedRouteId,
       {
@@ -84,18 +127,21 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
 // @desc    Delete a User's saved route
 // @route   Delete /saved-routes/edit/:savedRouteId
 // @access  Private
-router.delete("/delete/:savedRouteId", isAuthenticated, async (req, res, next) => {
+router.delete(
+  "/delete/:savedRouteId",
+  isAuthenticated,
+  async (req, res, next) => {
     const { savedRouteId } = req.params;
     const { _id } = req.payload;
-  try {
-    await SavedRoute.findOneAndDelete({ _id: savedRouteId });
-   
-      const allSavedRoutes = await SavedRoute.find({ userId: _id });
-    res.status(200).json({ message: "Route deleted" });
-  } catch (error) {
-    next(error);
-  }
-});
+    try {
+      await SavedRoute.findOneAndDelete({ _id: savedRouteId });
 
+      const allSavedRoutes = await SavedRoute.find({ userId: _id });
+      res.status(200).json({ message: "Route deleted" });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
