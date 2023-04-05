@@ -27,11 +27,11 @@ router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { food, drinks, sportswear, footwear, other } = req.body
   console.log(req.body);
   if (
-    !isValid(food, "boolean") ||
-    !isValid(drinks, "boolean") ||
-    !isValid(sportswear, "boolean") ||
-    !isValid(footwear, "boolean") ||
-    !isValid(other,"array")
+    !isValid(food, "food") ||
+    !isValid(drinks, "drinks") ||
+    !isValid(sportswear, "sportswear") ||
+    !isValid(footwear, "footwear") ||
+    !isValid(other, "array")
   ) {
     res.status(400).json({ message: "Please check your fields" });
     return;
