@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { isAuthenticated } = require("../middlewares/jwt");
 const SavedRoute = require("../models/SavedRoute");
 const User = require("../models/User");
-const Route = require("../models/Route");
+const jwt = require("jsonwebtoken");
 
 // @desc    Get all User's saved routes
 // @route   GET /saved-routes/all
@@ -105,20 +105,49 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
           levelToUpdate = level;
           break;
       }
-
-     await User.findByIdAndUpdate(_id, {
-        level: levelToUpdate,
-        experiencePoints: experienceUp,
+      const updatedRoute = await SavedRoute.findByIdAndUpdate(
+        savedRouteId,
+        {
+          status,
+        },
+        { new: true }
+      );
+      const updatedUser = await User.findByIdAndUpdate(
+        _id,
+        {
+          level: levelToUpdate,
+          experiencePoints: experienceUp,
+        },
+        { new: true }
+      );
+      const payload = {
+        username: updatedUser.username,
+        img: updatedUser.img,
+        email: updatedUser.email,
+        experiencePoints: updatedUser.experiencePoints,
+        level: updatedUser.level,
+        isAdmin: updatedUser.isAdmin,
+        _id: updatedUser._id,
+      };
+      const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+        algorithm: "HS256",
+        expiresIn: "30d",
       });
+      res.status(200).json({ updatedRoute, authToken });
+
+      // generar token
+      // actualizar saved route
+      // return json con savedroute y token
+    } else {
+      const updatedRoute = await SavedRoute.findByIdAndUpdate(
+        savedRouteId,
+        {
+          status,
+        },
+        { new: true }
+      );
+      res.status(201).json(updatedRoute);
     }
-    const updatedRoute = await SavedRoute.findByIdAndUpdate(
-      savedRouteId,
-      {
-        status,
-      },
-      { new: true }
-    );
-    res.status(201).json(updatedRoute);
   } catch (error) {
     next(error);
   }
