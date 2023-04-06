@@ -69,7 +69,7 @@ const isValid = (value, typeOfvalue) => {
     ) {
       return true;
     } else {
-      console.log("food")
+
       return false;
     }
   } else if (typeOfvalue === "drinks") {
@@ -82,7 +82,7 @@ const isValid = (value, typeOfvalue) => {
     ) {
       return true;
     } else {
-      console.log("drinks");
+
       return false;
     }
   } else if (typeOfvalue === "sportswear") {
@@ -95,7 +95,7 @@ const isValid = (value, typeOfvalue) => {
     ) {
       return true;
     } else {
-      console.log("sportswear");
+
       return false;
     }
   } else if (typeOfvalue === "footwear") {
@@ -107,7 +107,7 @@ const isValid = (value, typeOfvalue) => {
     ) {
       return true;
     } else {
-      console.log("footwear");
+
       return false;
     }
   }

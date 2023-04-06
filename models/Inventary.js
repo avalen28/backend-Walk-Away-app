@@ -39,7 +39,7 @@ const inventarySchema = new Schema(
       ],
       default: "Empty",
     },
-    other: [String],
+    other: { type: [String], default: ["Empty"] },
   },
   {
     timestamps: true,

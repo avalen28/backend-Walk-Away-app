@@ -25,7 +25,7 @@ router.get("/", isAuthenticated, async (req, res, next) => {
 router.put("/edit",isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { food, drinks, sportswear, footwear, other } = req.body
-  console.log(req.body);
+
   if (
     !isValid(food, "food") ||
     !isValid(drinks, "drinks") ||

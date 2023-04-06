@@ -43,9 +43,7 @@ router.post("/signup", async (req, res, next) => {
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password1, salt);
       const newUser = await User.create({ email, hashedPassword, username });
-      console.log(newUser)
       const newUserInventary = await Inventary.create({ userId: newUser._id });
-      console.log(newUserInventary)
       res.status(201).json({ data: newUser });
     }
   } catch (error) {
