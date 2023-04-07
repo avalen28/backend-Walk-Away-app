@@ -4,7 +4,7 @@ mongoose.set("strictQuery", true);
 const User = require("../models/User");
 const Route = require("../models/Route");
 const Inventary = require("../models/Inventary");
-
+const SavedRoute = require("../models/SavedRoute")
 // Place the array you want to seed
 
 //keys with value "default" is not necessary include it
@@ -93,6 +93,9 @@ mongoose
   })
   .then(() => {
     return Inventary.deleteMany({});
+  })
+  .then(() => {
+    return SavedRoute.deleteMany({});
   })
   .then(() => {
     return Route.create(routesArr);
