@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const isValid = require("../utils/index");
+const SavedRoute = require("../models/SavedRoute");
 
 // @desc    Get all Users
 // @route   GET /users/all
@@ -105,7 +106,7 @@ router.delete("/delete", isAuthenticated, async (req, res, next) => {
   try {
     await Inventary.findOneAndDelete({ userId: _id });
     await User.findByIdAndDelete(_id);
-    const allUsers = await User.find();
+    await SavedRoute.findOneAndDelete({ userId: _id });
     res.status(200).json({ message: "user deleted" });
   } catch (error) {
     next(error);
