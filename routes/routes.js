@@ -35,7 +35,6 @@ router.get("/:routeId",isAuthenticated, async (req, res, next) => {
 router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
   const {
     name,
-    image,
     distance,
     level,
     description,
@@ -43,19 +42,22 @@ router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
     inventary,
     tips,
   } = req.body;
+  console.log("body, ",req.body)
   if (
     !isValid(name, "string") ||
-    !isValid(image, "string") ||
     !isValid(distance, "number") ||
     !isValid(level, "number") ||
     !isValid(description, "string") ||
     !isValid(estimatedDuration, "number") ||
-    !isValid(inventary, "inventary") 
+    !isValid(inventary, "inventary") ||
+    !isValid(tips, "string")
   ) {
+    console.log("no estoy entrando aqui")
     res.status(400).json({ message: "Please check your fields" });
     return;
   }
   try {
+    console.log("en el try")
     const newRoute = await Route.create(req.body);
     res.status(201).json(newRoute);
   } catch (error) {
@@ -71,11 +73,13 @@ router.put(
   isAuthenticated,
   isAdmin,
   async (req, res, next) => {
+    console.log("hola")
     const { routeId } = req.params;
     const {
       name,
-      image,
       distance,
+      image,
+      routeImage,
       level,
       description,
       estimatedDuration,
@@ -85,19 +89,20 @@ router.put(
     if (
       !isValid(name, "string") ||
       !isValid(image, "string") ||
+      !isValid(routeImage, "string") ||
       !isValid(distance, "number") ||
       !isValid(level, "number") ||
       !isValid(description, "string") ||
       !isValid(estimatedDuration, "number") ||
       !isValid(inventary, "inventary") ||
       !isValid(tips, "tips")
-
     ) {
       res.status(400).json({ message: "Please check your fields" });
       return;
     }
   
     try {
+      console.log("hola2")
       await Route.findByIdAndUpdate(routeId, req.body, { new: true });
       const updateRoute = await Route.findById(routeId);
       res.status(200).json(updateRoute);

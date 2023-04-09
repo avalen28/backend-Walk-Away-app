@@ -4,7 +4,7 @@ mongoose.set("strictQuery", true);
 const User = require("../models/User");
 const Route = require("../models/Route");
 const Inventary = require("../models/Inventary");
-const SavedRoute = require("../models/SavedRoute")
+const SavedRoute = require("../models/SavedRoute");
 // Place the array you want to seed
 
 //keys with value "default" is not necessary include it
@@ -38,7 +38,9 @@ const routesArr = [
   {
     name: "Ruta Cazadores",
     image:
-      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+      "https://www.milviatges.com/wp-content/uploads/sites/267/2017/07/Senda-de-los-Cazadores-de-Ordesa.jpg",
+    routeImage:
+      "https://static-maps.alltrails.com/production/at-map/161062181/v1-trail-spain-huesca-senda-de-los-cazadores-at-map-161062181-1679389679-414w200h-en-US-i-2-style_3.png",
     distance: 16,
     level: 1,
     description: "amazing route in Ordesa",
@@ -53,7 +55,7 @@ const routesArr = [
   {
     name: "Saldes",
     image:
-      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+      "https://mediaim.expedia.com/destination/2/71d27dac679a004669ecd35f5e657118.jpg",
     distance: 7,
     level: 3,
     description: "amazing route in Pedraforca",
@@ -68,7 +70,9 @@ const routesArr = [
   {
     name: "Ruta a Mordor",
     image:
-      "https://xn--outletmontaa-khb.com/wp-content/uploads/2021/09/Grupo-3.jpg",
+      "https://t3.ftcdn.net/jpg/05/43/63/92/360_F_543639248_VylNFt8EtBXkpQ08SmnCFjyGirOaBING.jpg",
+    routeImage:
+      "https://c4.wallpaperflare.com/wallpaper/666/150/494/middle-earth-map-the-lord-of-the-rings-wallpaper-preview.jpg",
     distance: 8,
     level: 5,
     description: "amazing route to Mordor",

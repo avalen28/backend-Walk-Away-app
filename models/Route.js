@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const routeSchema = new Schema(
@@ -9,7 +9,13 @@ const routeSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
+      default:
+        "https://images.squarespace-cdn.com/content/63d00bcc43aae3657868830b/1675370946198-Z5F9F296XS071OFSOQHD/Cover-Stipple-Mountains.jpg?content-type=image%2Fjpeg",
+    },
+    routeImage: {
+      type: String,
+      default:
+        "https://jalamaoutdoor.com/wp-content/uploads/2018/12/orientacion-montan%CC%83a-ppal.jpg",
     },
     distance: {
       type: Number,
@@ -74,5 +80,5 @@ const routeSchema = new Schema(
     timestamps: true,
   }
 );
-const Route = model("Route", routeSchema)
-module.exports = Route
+const Route = model("Route", routeSchema);
+module.exports = Route;
