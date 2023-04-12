@@ -36,6 +36,7 @@ router.get("/:routeId", isAuthenticated, async (req, res, next) => {
 // @route   POST /saved-routes/add/:routeId
 // @access  Private
 router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
+
   const { _id } = req.payload;
   const { routeId } = req.params;
   try {
@@ -134,10 +135,6 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
         expiresIn: "30d",
       });
       res.status(200).json({ updatedRoute, authToken });
-
-      // generar token
-      // actualizar saved route
-      // return json con savedroute y token
     } else {
       const updatedRoute = await SavedRoute.findByIdAndUpdate(
         savedRouteId,
@@ -154,7 +151,7 @@ router.put("/edit/:savedRouteId", isAuthenticated, async (req, res, next) => {
 });
 
 // @desc    Delete a User's saved route
-// @route   Delete /saved-routes/edit/:savedRouteId
+// @route   Delete /saved-routes/delete/:savedRouteId
 // @access  Private
 router.delete(
   "/delete/:savedRouteId",
