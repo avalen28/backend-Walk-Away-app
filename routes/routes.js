@@ -3,7 +3,6 @@ const Route = require("../models/Route");
 const { isAuthenticated, isAdmin } = require("../middlewares/jwt");
 const isValid = require("../utils/index");
 
-
 // @desc    Get all Routes
 // @route   GET /routes/all
 // @access  Public
@@ -19,7 +18,7 @@ router.get("/all", async (req, res, next) => {
 // @desc    Get an especific Route
 // @route   GET /routes/:routeId
 // @access  private
-router.get("/:routeId",isAuthenticated, async (req, res, next) => {
+router.get("/:routeId", isAuthenticated, async (req, res, next) => {
   const { routeId } = req.params;
   try {
     const route = await Route.findById(routeId);
@@ -33,31 +32,20 @@ router.get("/:routeId",isAuthenticated, async (req, res, next) => {
 // @route   POST /routes/new
 // @access  Private - Admin
 router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
-  const {
-    name,
-    distance,
-    level,
-    description,
-    estimatedDuration,
-    inventary,
-    tips,
-  } = req.body;
-  console.log("body, ",req.body)
+  const { name, distance, level, description, estimatedDuration, inventary } =
+    req.body;
   if (
     !isValid(name, "string") ||
     !isValid(distance, "number") ||
     !isValid(level, "number") ||
     !isValid(description, "string") ||
     !isValid(estimatedDuration, "number") ||
-    !isValid(inventary, "inventary") ||
-    !isValid(tips, "string")
+    !isValid(inventary, "inventary")
   ) {
-    console.log("no estoy entrando aqui")
     res.status(400).json({ message: "Please check your fields" });
     return;
   }
   try {
-    console.log("en el try")
     const newRoute = await Route.create(req.body);
     res.status(201).json(newRoute);
   } catch (error) {
@@ -73,7 +61,6 @@ router.put(
   isAuthenticated,
   isAdmin,
   async (req, res, next) => {
-    console.log("hola")
     const { routeId } = req.params;
     const {
       name,
@@ -84,7 +71,6 @@ router.put(
       description,
       estimatedDuration,
       inventary,
-      tips,
     } = req.body;
     if (
       !isValid(name, "string") ||
@@ -94,15 +80,13 @@ router.put(
       !isValid(level, "number") ||
       !isValid(description, "string") ||
       !isValid(estimatedDuration, "number") ||
-      !isValid(inventary, "inventary") ||
-      !isValid(tips, "tips")
+      !isValid(inventary, "inventary")
     ) {
       res.status(400).json({ message: "Please check your fields" });
       return;
     }
-  
+
     try {
-      console.log("hola2")
       await Route.findByIdAndUpdate(routeId, req.body, { new: true });
       const updateRoute = await Route.findById(routeId);
       res.status(200).json(updateRoute);

@@ -20,7 +20,7 @@ const routeSchema = new Schema(
     distance: {
       type: Number,
       required: true,
-      min: 0,
+      min: 1,
     },
     level: {
       type: Number,

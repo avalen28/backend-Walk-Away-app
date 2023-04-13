@@ -9,12 +9,14 @@ const isValid = (value, typeOfvalue) => {
     if (typeof value === "string" && value.trim().length > 0) {
       return true;
     } else {
+     
       return false;
     }
   } else if (typeOfvalue === "number") {
-    if (typeof value === "number") {
+    if (typeof value === "number" && value >0) {
       return true;
     } else {
+      
       return false;
     }
   } else if (typeOfvalue === "array") {
@@ -47,6 +49,7 @@ const isValid = (value, typeOfvalue) => {
     ) {
       return true;
     } else {
+     
       return false;
     }
   } else if (typeOfvalue === "tips") {
