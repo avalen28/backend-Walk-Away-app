@@ -32,10 +32,11 @@ router.get("/:routeId", isAuthenticated, async (req, res, next) => {
 // @route   POST /routes/new
 // @access  Private - Admin
 router.post("/new", isAuthenticated, isAdmin, async (req, res, next) => {
-  const { name, distance, level, description, estimatedDuration, inventary } =
+  const { name,location, distance, level, description, estimatedDuration, inventary } =
     req.body;
   if (
     !isValid(name, "string") ||
+    !isValid(location, "string") ||
     !isValid(distance, "number") ||
     !isValid(level, "number") ||
     !isValid(description, "string") ||
@@ -64,18 +65,17 @@ router.put(
     const { routeId } = req.params;
     const {
       name,
+      location,
       distance,
-      image,
-      routeImage,
       level,
       description,
       estimatedDuration,
       inventary,
     } = req.body;
+
     if (
       !isValid(name, "string") ||
-      !isValid(image, "string") ||
-      !isValid(routeImage, "string") ||
+      !isValid(location, "string") ||
       !isValid(distance, "number") ||
       !isValid(level, "number") ||
       !isValid(description, "string") ||

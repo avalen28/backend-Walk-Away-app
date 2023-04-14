@@ -61,6 +61,7 @@ const usersArr = [
 const routesArr = [
   {
     name: "Ruta de los Cazadores",
+    location: "Huesca",
     image:
       "https://www.milviatges.com/wp-content/uploads/sites/267/2017/07/Senda-de-los-Cazadores-de-Ordesa.jpg",
     routeImage:
@@ -79,6 +80,7 @@ const routesArr = [
   },
   {
     name: "Pedraforca - Low part",
+    location: "Saldes",
     image: "https://cmsmultimedia.catalunya.com/mds/multimedia/3611/F1/",
     routeImage:
       "https://static-maps.alltrails.com/production/at-map/60694547/v1-trail-spain-catalonia-pr-c-123-volta-al-pedraforca-at-map-60694547-1645112132-414w200h-en-US-i-2-style_3.png",
@@ -96,6 +98,7 @@ const routesArr = [
   },
   {
     name: "Pedraforca - Mid part",
+    location: "Saldes",
     image:
       "https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNTI0MTI0ODEvZmI3ODc1NjIxN2ExZTRiYjg3YmZkOWJlYjlmMTc2YzQuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjo1MDAsImhlaWdodCI6NTAwLCJmaXQiOiJpbnNpZGUifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0=",
     routeImage:
@@ -114,6 +117,7 @@ const routesArr = [
   },
   {
     name: "Pedraforca - high part",
+    location: "Saldes",
     image:
       "https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjQ2MDEyNjIvN2I0MzRjYTcyNmJhM2JkZGViOWQ3MjE3NzQyOTdmNDIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjo1MDAsImhlaWdodCI6NTAwLCJmaXQiOiJpbnNpZGUifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0=",
     routeImage:
