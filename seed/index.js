@@ -16,14 +16,14 @@ const usersArr = [
     level: 2,
     experiencePoints: 300,
     hashedPassword:
-      "$2a$10$1QvmsDTCfg8hC96HwDhREuJYlu1RbEUjgCZH7CQ2baxUyKX4v.85a", //Bojack1234!
+      "$2a$10$1QvmsDTCfg8hC96HwDhREuJYlu1RbEUjgCZH7CQ2baxUyKX4v.85a", 
   },
   {
     username: "Ale",
     img: "https://ca.slack-edge.com/T047BNNEQQH-U046SFMVD62-d965e1d1b1a0-512",
     email: "Ale@gmail.com",
     hashedPassword:
-      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", //Prueba1234!
+      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", 
     level: 5,
     experiencePoints: 1900,
   },
@@ -34,7 +34,7 @@ const usersArr = [
     level: 4,
     experiencePoints: 900,
     hashedPassword:
-      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", //Prueba1234!
+      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", 
   },
   {
     username: "Guillem",
@@ -43,7 +43,7 @@ const usersArr = [
     level: 4,
     experiencePoints: 900,
     hashedPassword:
-      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", //Prueba1234!
+      "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", 
     isAdmin: false,
   },
   {
@@ -53,7 +53,7 @@ const usersArr = [
     level: 2,
     experiencePoints: 400,
     hashedPassword:
-      "$2a$10$Qa6R5HNNHrULQ2crT2jYzeWwrtStJ7AwOKwRor./La2JrJiWKklpa", //Admin1234!
+      "$2a$10$Qa6R5HNNHrULQ2crT2jYzeWwrtStJ7AwOKwRor./La2JrJiWKklpa", 
     isAdmin: true,
   },
 ];
