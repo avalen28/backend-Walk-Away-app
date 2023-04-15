@@ -37,16 +37,6 @@ const usersArr = [
       "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", //Prueba1234!
   },
   {
-    username: "Alberto",
-    img: "https://ca.slack-edge.com/T047BNNEQQH-U047QRP4UCQ-5ec0f0fe2789-512",
-    email: "alberto@gmail.com",
-    level: 2,
-    experiencePoints: 400,
-    hashedPassword:
-      "$2a$10$Qa6R5HNNHrULQ2crT2jYzeWwrtStJ7AwOKwRor./La2JrJiWKklpa", //Admin1234!
-    isAdmin: true,
-  },
-  {
     username: "Guillem",
     img: "https://ca.slack-edge.com/T047BNNEQQH-U046WC9A2KX-3519590f26cd-512",
     email: "guillem@gmail.com",
@@ -55,6 +45,16 @@ const usersArr = [
     hashedPassword:
       "$2a$10$TyzF6SVqTDd6WP0ZDpgHJeK4JQ2MF8b3kTYdr2GYFQ8lcfjBEtjrG", //Prueba1234!
     isAdmin: false,
+  },
+  {
+    username: "Alberto",
+    img: "https://ca.slack-edge.com/T047BNNEQQH-U047QRP4UCQ-5ec0f0fe2789-512",
+    email: "alberto@gmail.com",
+    level: 2,
+    experiencePoints: 400,
+    hashedPassword:
+      "$2a$10$Qa6R5HNNHrULQ2crT2jYzeWwrtStJ7AwOKwRor./La2JrJiWKklpa", //Admin1234!
+    isAdmin: true,
   },
 ];
 
@@ -76,7 +76,7 @@ const routesArr = [
       sportswear: "Trekking clothes (spring weather)",
       footwear: "Light boots or trekking slippers",
     },
-    tips: "grab your camera, the views are amazing.",
+    tips: "Grab your camera, the views are amazing.",
   },
   {
     name: "Pedraforca - Low part",
@@ -133,6 +133,25 @@ const routesArr = [
       footwear: "High Mountain boots",
     },
     tips: "Check always the weather.",
+  },
+  {
+    name: "Aigüestortes",
+    location: "Lleida",
+    image:
+      "https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvNTE0MzE4NDUvODQ5MWNkMzY2ODhjZDUxZDg2ZGZiZmZkZjFlZjM2YzAuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJqcGVnIiwicmVzaXplIjp7IndpZHRoIjo1MDAsImhlaWdodCI6NTAwLCJmaXQiOiJpbnNpZGUifSwicm90YXRlIjpudWxsLCJqcGVnIjp7InRyZWxsaXNRdWFudGlzYXRpb24iOnRydWUsIm92ZXJzaG9vdERlcmluZ2luZyI6dHJ1ZSwib3B0aW1pc2VTY2FucyI6dHJ1ZSwicXVhbnRpc2F0aW9uVGFibGUiOjN9fX0=",
+    routeImage:
+      "https://static-maps.alltrails.com/production/at-map/27941793/v1-trail-spain-lleida-estany-llong-estany-redo-at-map-27941793-1654566601-414w200h-en-US-i-2-style_3.png",
+    distance: 8,
+    level: 1,
+    description: "Chill trekking in a National Park",
+    estimatedDuration: 3.5,
+    inventary: {
+      drinks: "1.5L.",
+      food: "Snacks",
+      sportswear: "Trekking clothes (spring weather)",
+      footwear: "Light boots or trekking slippers",
+    },
+    tips: "Trekking child friendly",
   },
 ];
 
