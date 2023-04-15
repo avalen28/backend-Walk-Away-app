@@ -11,7 +11,7 @@ const SavedRoute = require("../models/SavedRoute");
 // @desc    Get all Users
 // @route   GET /users/all
 // @access  Private - Admin
-// @Postman Checked
+
 router.get("/all", isAuthenticated, isAdmin, async (req, res, next) => {
   try {
     const users = await User.find();
@@ -24,7 +24,7 @@ router.get("/all", isAuthenticated, isAdmin, async (req, res, next) => {
 // @desc    Get an especific User
 // @route   GET /users/me
 // @access  Private
-// @Postman Checked
+
 router.get("/me", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   try {
@@ -38,7 +38,7 @@ router.get("/me", isAuthenticated, async (req, res, next) => {
 // @desc    PUT edit User in session
 // @route   PUT /users/edit/
 // @access  Private
-// @Postman Checked
+
 router.put("/edit", isAuthenticated, async (req, res, next) => {
  
   const { _id } = req.payload;
@@ -100,7 +100,7 @@ router.put("/edit", isAuthenticated, async (req, res, next) => {
 // @desc    Delete delete User and Inventary
 // @route   DELETE /users/delete
 // @access  Private
-// @Postman Checked
+
 router.delete("/delete", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   try {

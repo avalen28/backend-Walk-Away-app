@@ -8,9 +8,9 @@ const saltRounds = 10;
 const isValid = require("../utils/index");
 
 // @desc    SIGN UP new user
-// @route   POST /api/v1/auth/signup
+// @route   POST /auth/signup
 // @access  Public
-// @Postman Checked
+
 router.post("/signup", async (req, res, next) => {
   const { email, password1, password2, username } = req.body;
   if (!isValid(username, "string")) {
@@ -52,9 +52,9 @@ router.post("/signup", async (req, res, next) => {
 });
 
 // @desc    LOG IN user
-// @route   POST /api/v1/auth/login
+// @route   POST /auth/login
 // @access  Public
-// @Postman Checked
+
 router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!isValid(email, "email")) {
@@ -109,9 +109,9 @@ router.post("/login", async (req, res, next) => {
 });
 
 // @desc    GET logged in user
-// @route   GET /api/v1/auth/me
+// @route   GET /auth/me
 // @access  Private
-// @Postman Checked
+
 router.get("/me", isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`

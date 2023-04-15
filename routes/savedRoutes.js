@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 // @desc    Get all User's saved routes
 // @route   GET /saved-routes/all
 // @access  Private
+
 router.get("/all", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   try {
