@@ -187,6 +187,7 @@ mongoose
       { userId: ids[1] },
       { userId: ids[2] },
       { userId: ids[3] },
+      { userId: ids[4] },
     ];
     return Inventary.create(inventaryData);
   })
