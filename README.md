@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a the backend repository for the React application `Walk Away.
+This is a the backend repository for the React application Walk Away.
 
 ---
 
