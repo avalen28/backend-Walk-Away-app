@@ -1,4 +1,4 @@
-# Project's name REST API
+# WALK AWAY REST API
 
 ## Description
 
@@ -247,33 +247,33 @@ Users in the database have the following properties:
 
 ## API endpoints and usage
 
-| Action                            | Method | Endpoint                           | Req.body                                                                      | Private/Public  |
-| --------------------------------- | ------ | ---------------------------------- | ----------------------------------------------------------------------------- | --------------- |
-| SIGN UP user and create inventary | POST   | /auth/signup                       | { email, password1, password2, username }                                     | Public          |
-| LOG IN user                       | POST   | /auth/login                        | { email, password }                                                           | Public          |
-| GET logged in user                | GET    | /auth/me                           |                                                                               | Private         |
-| Get all users                     | Get    | /users/all                         |                                                                               | Private-admin   |
-| Get an especific users            | Get    | /users/me                          |                                                                               | Private         |
-| PUT edit User in session          | PUT    | /users/edit                        | { username, email, img, password1, password2 }                                | Private         |
-| Delete user and inventary         | Delete | /users/delete                      |                                                                               | Private         |
-| Get all routes - browser          | Get    | /routes/all                        |                                                                               | Public          |
-| Get an especific Route            | Get    | /routes/:routeId                   |                                                                               | Private         |
-| Post create a new Route           | Post   | /routes/new                        | { name,location, distance, level, description, estimatedDuration, inventary } | Private - admin |
-| PUT edit route                    | PUT    | /routes/edit/:routeId              | {name,location,distance,level,description,estimatedDuration,inventary}        | Private - admin |
-| Delete Route                      | Delete | /routes/delete/:routeId            |                                                                               | Private - admin |
-| Get the User's inventary          | Get    | /inventary                         |                                                                               | Private         |
-| PUT edit User's inventary         | Put    | /inventary/edit                    | { food, drinks, sportswear, footwear, other }                                 | Private         |
-| Get all User's saved routes       | Get    | /saved-routes/all                  |                                                                               | Private         |
-| Get single User's saved routes    | Get    | /saved-routes/:routeId             |                                                                               | Private         |
-| Create a User's saved route       | Post   | /saved-routes/add/:routeId         |                                                                               | Private         |
-| Edit a User's saved route         | Put    | /saved-routes/edit/:savedRouteId   | { status }                                                                    | Private         |
-| Delete a User's saved route       | Delete | /saved-routes/delete/:savedRouteId |                                                                               | Private         |
+| Action                                       | Method | Endpoint                           | Req.body                                                                      | Private/Public  |
+| -------------------------------------------- | ------ | ---------------------------------- | ----------------------------------------------------------------------------- | --------------- |
+| SIGN UP user and create inventary            | POST   | /auth/signup                       | { email, password1, password2, username }                                     | Public          |
+| LOG IN user                                  | POST   | /auth/login                        | { email, password }                                                           | Public          |
+| Get logged in user                           | GET    | /auth/me                           |                                                                               | Private         |
+| Get all users                                | GET    | /users/all                         |                                                                               | Private-admin   |
+| Get a specific user                          | GET    | /users/me                          |                                                                               | Private         |
+| Edit user in session                         | PUT    | /users/edit                        | { username, email, img, password1, password2 }                                | Private         |
+| Delete user in session and his inventary     | DELETE | /users/delete                      |                                                                               | Private         |
+| Get all routes                               | GET    | /routes/all                        |                                                                               | Public          |
+| Get a specific route                         | GET    | /routes/:routeId                   |                                                                               | Private         |
+| Create a new route                           | POST   | /routes/new                        | { name,location, distance, level, description, estimatedDuration, inventary } | Private - admin |
+| Edit route                                   | PUT    | /routes/edit/:routeId              | {name,location,distance,level,description,estimatedDuration,inventary}        | Private - admin |
+| Delete route                                 | DELETE | /routes/delete/:routeId            |                                                                               | Private - admin |
+| Get the inventary from the user in session   | GET    | /inventary                         |                                                                               | Private         |
+| Edit inventary from the user in session      | PUT    | /inventary/edit                    | { food, drinks, sportswear, footwear, other }                                 | Private         |
+| Get all saved routes from user in session    | GET    | /saved-routes/all                  |                                                                               | Private         |
+| Get single saved route from user in session  | GET    | /saved-routes/:routeId             |                                                                               | Private         |
+| Create a saved route for the user in session | POST   | /saved-routes/add/:routeId         |                                                                               | Private         |
+| Edit a saved route for the user in session   | PUT    | /saved-routes/edit/:savedRouteId   | { status }                                                                    | Private         |
+| Delete a saved route for the user in session | DELETE | /saved-routes/delete/:savedRouteId |                                                                               | Private         |
 
 ---
 
 ## Useful links
 
-- [Presentation slides]()
-- [Frontend repository]()
-- [Frontend deploy]()
-- [Deployed REST API]()
+- [Presentation slides](https://slides.com/albertovalenzuelamunoz/deck-25b4ad)
+- [Frontend repository](github.com/avalen28/frontend-template-m3)
+- [Frontend deploy](https://walk-away.netlify.app)
+- [Deployed REST API](walkaway.fly.dev)
