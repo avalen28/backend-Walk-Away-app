@@ -41,7 +41,7 @@ router.post("/add/:routeId", isAuthenticated, async (req, res, next) => {
   const { _id } = req.payload;
   const { routeId } = req.params;
   try {
-    const savedRoutesFromDB = await SavedRoute.findOne({ routeId });
+    const savedRoutesFromDB = await SavedRoute.findOne({ routeId,userId:_id });
     if (savedRoutesFromDB) {
       res.status(400).json({ message: "This route is already added" });
       return;
