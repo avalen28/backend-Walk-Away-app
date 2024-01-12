@@ -1,6 +1,6 @@
 # WALK AWAY REST API
 
-## Description!
+## Description!!
 
 This is a the backend repository for the React application Walk Away.
 
